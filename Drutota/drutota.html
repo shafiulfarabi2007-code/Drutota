@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drutota - Fast, Reliable Delivery Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFD600;
+            --primary-dark: #e6c100;
+            --black: #111111;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+            --gray-dark: #e0e0e0;
+            --text: #333333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --black: #f5f5f5;
+            --white: #1a1a1a;
+            --gray: #2a2a2a;
+            --gray-dark: #3a3a3a;
+            --text: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--white);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--primary);
+            color: var(--black);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 3px solid var(--primary);
+            color: var(--black);
+            font-weight: 700;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            overflow: hidden;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list {
+            display: flex;
+            margin-right: 20px;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--black);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--black);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 100px 0;
+            color: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* About Section */
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .highlight-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .highlight-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background-color: var(--gray);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            height: 150px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background-color: var(--gray);
+        }
+
+        .pricing-table {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            background-color: var(--primary);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .pricing-body {
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-dark);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 214, 0, 0.1);
+        }
+
+        .price-highlight {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Mobile App */
+        .app-promo {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--black);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .app-content {
+            flex: 1;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .app-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .app-btn {
+            display: flex;
+            align-items: center;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .app-btn:hover {
+            background-color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .app-btn i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .app-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--gray);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-direction: column;
+            text-align: center;
+            width: 100%;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-info {
+            width: 100%;
+            text-align: center;
+        }
+
+        .testimonial-info h4 {
+            color: var(--black);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-rating {
+            color: var(--primary);
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .contact-header {
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .map-container {
+            height: 300px;
+            margin-top: 30px;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .footer-description {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: var(--black);
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Chatbot */
+        .chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .chatbot-btn {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chatbot-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+        }
+
+        .chatbot-header {
+            background-color: var(--primary);
+            color: var(--black);
+            padding: 15px 20px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+        }
+
+        .bot-message {
+            background-color: var(--gray);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background-color: var(--primary);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid var(--gray-dark);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-size: 1rem;
+        }
+
+        .chatbot-input button {
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        /* Chatbot Form */
+        .chatbot-form {
+            padding: 15px;
+        }
+
+        .chatbot-form-group {
+            margin-bottom: 15px;
+        }
+
+        .chatbot-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-form-group input,
+        .chatbot-form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: var(--primary);
+            color: var(--black);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: none;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-container, .app-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content, .app-content {
+                margin-bottom: 40px;
+            }
+            
+            .hero-actions, .app-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-list {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                background-color: var(--white);
+                width: 100%;
+                height: calc(100vh - 80px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-list.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.3rem;
+            }
+
+            .chatbot-window {
+                width: 300px;
+                right: -20px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .testimonial-grid, .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-buttons {
+                flex-direction: column;
+            }
+
+            .chatbot-window {
+                width: 280px;
+                right: -40px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-img">
+                    <!-- Replace with your actual logo image -->
+                    <img src="drutota.png" alt="Drutota Logo">
+                </div>
+                <div class="logo-text">Drutota</div>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#pricing" class="nav-link">Pricing</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="header-actions">
+                    <button class="theme-toggle" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Fast, Reliable, Everywhere – Drutota Delivery</h1>
+                <p class="hero-subtitle">Your packages delivered at lightning speed across Bangladesh</p>
+                <div class="hero-actions">
+                    <button class="btn" id="book-now-btn">Book a Delivery Now</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <i class="fas fa-motorcycle" style="font-size: 300px;"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>We are committed to providing the fastest and most reliable delivery service across Bangladesh, ensuring your packages reach their destination safely and on time.</p>
+            </div>
+            
+            <div class="about-highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="highlight-title">Fast Delivery</h3>
+                    <p>We guarantee swift delivery with optimized routes and efficient logistics.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="highlight-title">Secure Handling</h3>
+                    <p>Your packages are handled with care and security throughout the journey.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3 class="highlight-title">Affordable Rates</h3>
+                    <p>Competitive pricing that doesn't compromise on service quality.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="highlight-title">24/7 Support</h3>
+                    <p>Our customer support team is available round the clock to assist you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Our simple and efficient process ensures your delivery is handled with care from start to finish</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="step-title">Book Online</h3>
+                    <p>Schedule your delivery through our website or mobile app in just a few clicks.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3 class="step-title">We Pickup</h3>
+                    <p>Our delivery executive will arrive at your doorstep to collect the package.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="step-title">Real-time Tracking</h3>
+                    <p>Track your package in real-time through our app or website.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="step-title">Delivered with Care</h3>
+                    <p>Your package is delivered safely to the recipient with proper protocols.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer a comprehensive range of delivery solutions to meet all your needs</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Same Day Delivery</h3>
+                    <p>Get your packages delivered within the same day inside city limits.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">City-to-City</h3>
+                        <p>Fast and reliable delivery service between major cities in Bangladesh.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">E-commerce Solutions</h3>
+                        <p>Integrated delivery solutions for online businesses and marketplaces.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Corporate Packages</h3>
+                        <p>Specialized services for corporate clients with bulk shipping needs.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Cash on Delivery</h3>
+                        <p>Collect payment upon delivery for your e-commerce transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Transparent Pricing</h2>
+                <p>Clear and affordable pricing for all your delivery needs</p>
+            </div>
+            
+            <div class="pricing-table">
+                <div class="pricing-header">
+                    <h3 class="pricing-title">Delivery Rates</h3>
+                    <p>All prices in Bangladeshi Taka (BDT)</p>
+                </div>
+                
+                <div class="pricing-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Distance</th>
+                                <th>Base Price (1kg)</th>
+                                <th>Additional per KM</th>
+                                <th>Additional per KG</th>
+                                <th>Example: 5kg, 10km</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Within 3km</td>
+                                <td class="price-highlight">৳ 50</td>
+                                <td>N/A</td>
+                                <td>৳ 5 per kg</td>
+                                <td>৳ 50 + (4kg × ৳ 5) = ৳ 70</td>
+                            </tr>
+                            <tr>
+                                <td>Beyond 3km</td>
+                                <td class="price-highlight">৳ 50</td>
+                                <td>৳ 5 per km</td>
+                                <td>৳ 5 per kg</td>
+                                <td>৳ 50 + (7km × ৳ 5) + (4kg × ৳ 5) = ৳ 105</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p class="pricing-note">Note: Minimum charge is ৳ 50 for up to 3km and 1kg. Additional charges apply for distance beyond 3km and weight beyond 1kg.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile App -->
+    <section class="app-promo">
+        <div class="container app-container">
+            <div class="app-content">
+                <h2 class="app-title">Download Our Mobile App</h2>
+                <p>Get the best delivery experience with our feature-packed mobile application. Book deliveries, track parcels in real-time, and manage all your shipments on the go.</p>
+                
+                <div class="app-buttons">
+                    <a href="#" class="app-btn">
+                        <i class="fab fa-google-play"></i>
+                        <div>Google Play</div>
+                    </a>
+                    
+                    <a href="#" class="app-btn">
+                        <i class="fab fa-apple"></i>
+                        <div>App Store</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="app-image">
+                <i class="fas fa-mobile-alt" style="font-size: 300px;"></i>
+            </div>
+            </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>Hear from our satisfied customers about their experience with Drutota</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Rahim Ahmed</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Drutota delivered my important documents within 3 hours! Their service is incredibly fast and reliable. Highly recommended!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Fatima Begum</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"I use Drutota for my online business. Their cash on delivery service has helped increase my sales, and the delivery is always on time."</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Jamal Hossain</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"The real-time tracking feature is amazing. I knew exactly where my package was at all times. The delivery executive was also very professional."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for any queries or support needs</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-header">
+                        <h3>Contact Information</h3>
+                        <p>Reach out to us through any of the following channels</p>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Sadhur more,Rajshahi,Rajshahi Division,Bangladesh-6000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>24/7 Hotline</h4>
+                            <p>
+                      01707-276746</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>drutota@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Business Hours</h4>
+                            <p>24/7 Service Available</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58144.87441715106!2d88.57637018359376!3d24.374499999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fbefa4bc94a36b%3A0x9b9e79e4c9d3d3d3!2sSadhur%20More%2C%20Rajshahi!5e0!3m2!1sen!2sbd!4v1690464000000!5m2!1sen!2sbd" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p><strong>Prefer to book through WhatsApp?</strong></p>
+                        <button class="btn" id="whatsapp-btn" style="margin-top: 10px;">
+                            <i class="fab fa-whatsapp"></i> Message Us on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="logo-img">
+                            <img src="drutota.png" alt="Drutota Logo">
+                        </div>
+                        <div class="logo-text">Drutota</div>
+                    </div>
+                    <p class="footer-description">Fast, reliable delivery service across Rajshahi. Your trusted partner for all your delivery needs.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">Services</h3>
+                    <ul>
+                        <li><a href="#">Same Day Delivery</a></li>
+                        <li><a href="#">City-to-City</a></li>
+                        <li><a href="#">E-commerce Solutions</a></li>
+                        <li><a href="#">Corporate Packages</a></li>
+                        <li><a href="#">Cash on Delivery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Drutota Delivery Service. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <div class="chatbot-btn" id="chatbot-btn">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+        
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <span>Drutota Booking Assistant</span>
+                <button class="close-chatbot">&times;</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot-message">
+                    Hello! I'm here to help you book a delivery. Let's get started!
+                </div>
+                <div class="message bot-message">
+                    Please provide your name:
+                </div>
+            </div>
+            
+            <div class="chatbot-form" id="chatbot-form">
+                <div class="form-step active" id="step-name">
+                    <div class="chatbot-form-group">
+                        <input type="text" id="chatbot-name" placeholder="Your full name">
+                    </div>
+                    <button class="btn" id="next-from">Next</button>
+                </div>
+                
+                <div class="form-step" id="step-from">
+                    <div class="chatbot-form-group">
+                        <label>Pickup Address</label>
+                        <input type="text" id="chatbot-from" placeholder="Where should we pick up from?">
+                    </div>
+                    <button class="btn" id="next-to">Next</button>
+                </div>
+                
+                <div class="form-step" id="step-to">
+                    <div class="chatbot-form-group">
+                        <label>Delivery Address</label>
+                        <input type="text" id="chatbot-to" placeholder="Where should we deliver to?">
+                    </div>
+                    <button class="btn" id="next-phone">Next</button>
+                </div>
+                
+                <div class="form-step" id="step-phone">
+                    <div class="chatbot-form-group">
+                        <label>Your Phone Number</label>
+                        <input type="tel" id="chatbot-phone" placeholder="Your phone number">
+                    </div>
+                    <button class="btn" id="next-weight">Next</button>
+                </div>
+                
+                <div class="form-step" id="step-weight">
+                    <div class="chatbot-form-group">
+                        <label>Package Weight (kg)</label>
+                        <input type="number" id="chatbot-weight" placeholder="Approximate weight in kg" min="0.1" step="0.1">
+                    </div>
+                    <button class="btn" id="submit-booking">Submit Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const chatbotBtn = document.getElementById('chatbot-btn');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const closeChatbot = document.querySelector('.close-chatbot');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotForm = document.getElementById('chatbot-form');
+        const formSteps = document.querySelectorAll('.form-step');
+        const nextFromBtn = document.getElementById('next-from');
+        const nextToBtn = document.getElementById('next-to');
+        const nextPhoneBtn = document.getElementById('next-phone');
+        const nextWeightBtn = document.getElementById('next-weight');
+        const submitBookingBtn = document.getElementById('submit-booking');
+        const notification = document.getElementById('notification');
+        const bookNowBtn = document.getElementById('book-now-btn');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        
+        // Form data object
+        const bookingData = {
+            name: '',
+            from: '',
+            to: '',
+            phone: '',
+            weight: ''
+        };
+
+        // Show notification
+        function showNotification(message, duration = 3000) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, duration);
+        }
+
+        // Show chatbot window
+        chatbotBtn.addEventListener('click', () => {
+            chatbotWindow.style.display = 'flex';
+        });
+
+        // Book Now button opens chatbot
+        bookNowBtn.addEventListener('click', () => {
+            chatbotWindow.style.display = 'flex';
+        });
+
+        // WhatsApp button
+        whatsappBtn.addEventListener('click', () => {
+            window.open('https://wa.me/8801842441130', '_blank');
+        });
+
+        // Close chatbot window
+        closeChatbot.addEventListener('click', () => {
+            chatbotWindow.style.display = 'none';
+        });
+
+        // Move to next step in form
+        function goToStep(stepId) {
+            formSteps.forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById(stepId).classList.add('active');
+        }
+
+        // Add message to chat
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Handle form steps
+        nextFromBtn.addEventListener('click', () => {
+            const name = document.getElementById('chatbot-name').value.trim();
+            if (name) {
+                bookingData.name = name;
+                addMessage(name, true);
+                addMessage(`Thanks ${name}! Where should we pick up your package from?`);
+                goToStep('step-from');
+            } else {
+                showNotification('Please enter your name');
+            }
+        });
+
+        nextToBtn.addEventListener('click', () => {
+            const from = document.getElementById('chatbot-from').value.trim();
+            if (from) {
+                bookingData.from = from;
+                addMessage(from, true);
+                addMessage('Great! Where should we deliver it to?');
+                goToStep('step-to');
+            } else {
+                showNotification('Please enter pickup address');
+            }
+        });
+
+        nextPhoneBtn.addEventListener('click', () => {
+            const to = document.getElementById('chatbot-to').value.trim();
+            if (to) {
+                bookingData.to = to;
+                addMessage(to, true);
+                addMessage('Perfect! What is your phone number?');
+                goToStep('step-phone');
+            } else {
+                showNotification('Please enter delivery address');
+            }
+        });
+
+        nextWeightBtn.addEventListener('click', () => {
+            const phone = document.getElementById('chatbot-phone').value.trim();
+            if (phone) {
+                bookingData.phone = phone;
+                addMessage(phone, true);
+                addMessage('Almost done! What is the approximate weight of your package (in kg)?');
+                goToStep('step-weight');
+            } else {
+                showNotification('Please enter your phone number');
+            }
+        });
+
+        submitBookingBtn.addEventListener('click', () => {
+            const weight = document.getElementById('chatbot-weight').value.trim();
+            if (weight && !isNaN(weight) && parseFloat(weight) > 0) {
+                bookingData.weight = weight;
+                addMessage(`${weight} kg`, true);
+                
+                // Generate WhatsApp message
+                const whatsappMessage = `New Delivery Request:%0A%0AName: ${bookingData.name}%0APickup: ${bookingData.from}%0ADelivery: ${bookingData.to}%0APhone: ${bookingData.phone}%0AWeight: ${bookingData.weight} kg`;
+                
+                // Create WhatsApp link with updated number
+                const whatsappUrl = `https://wa.me/8801842441130?text=${whatsappMessage}`;
+                
+                // Open WhatsApp in new tab
+                window.open(whatsappUrl, '_blank');
+                
+                // Show confirmation
+                addMessage('Thank you! Your booking details have been sent via WhatsApp. We will contact you shortly to confirm your delivery.');
+                
+                // Reset form after a delay
+                setTimeout(() => {
+                    chatbotWindow.style.display = 'none';
+                    document.getElementById('chatbot-name').value = '';
+                    document.getElementById('chatbot-from').value = '';
+                    document.getElementById('chatbot-to').value = '';
+                    document.getElementById('chatbot-phone').value = '';
+                    document.getElementById('chatbot-weight').value = '';
+                    goToStep('step-name');
+                    
+                    // Clear messages except the first two
+                    while (chatbotMessages.children.length > 2) {
+                        chatbotMessages.removeChild(chatbotMessages.lastChild);
+                    }
+                }, 5000);
+            } else {
+                showNotification('Please enter a valid weight');
+            }
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.innerHTML = document.body.classList.contains('dark-mode') ? 
+                '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navList = document.querySelector('.nav-list');
+        
+        mobileToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            mobileToggle.innerHTML = navList.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars'></i>';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    navList.classList.remove('active');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
